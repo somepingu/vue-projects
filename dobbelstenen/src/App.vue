@@ -1,30 +1,41 @@
+// fix NaN bug
+
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { computed, ref } from 'vue';
+
+const numberOfDice = ref(10);
+const numberOfDieSides = ref(6);
+const rolls = ref([]);
+
+const diceCounts = computed( () => {
+  const counts = Array(numberOfDieSides.value).fill(0);
+  for (let i = 0; i<numberOfDice.value; i++) {
+    counts[rolls.value[i]-1]++;
+  }
+  return counts
+});
+
+const rollDice = () => {
+  rolls.value = [];
+  for (let i = 0; i < numberOfDice.value; i++) {
+    rolls.value.push(rollDie());
+  }
+};
+
+const rollDie = () => Math.floor(Math.random()*numberOfDieSides.value)+1;
+
+
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <ul>
+    <li v-for="(roll, index) in diceCounts" :key="index">Aantal {{ index + 1 }}'en gegooid: {{ roll }}</li>
+  </ul>
+  Aantal dobbelstenen:<input v-model="numberOfDice" placeholder="Vul hier in" type="string" />
+  Aantal zijden per dobbelsteen:<input v-model="numberOfDieSides" placeholder="Vul hier in" type="string" />
+  <button @click="rollDice">Roll dice!</button>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>
