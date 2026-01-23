@@ -1,0 +1,55 @@
+<template>
+    <div>
+        <p>Vul in naam en leeftijd</p>
+        <input v-model="newName" placeholder="Vul hier je naam in" type="string" />
+        <input v-model.number="newAge" placeholder="Vul hier je leeftijd in" type="number" />
+        <button @click="addPerson">Toevoegen</button>
+    </div>
+    <ul>
+        <h2>Personen</h2>
+        <li v-for="(person, index) in people" :key="index">Naam: {{ person.name }}, Leeftijd: {{ person.age }}</li>
+        <h2>Kinderen</h2>
+        <li v-for="(person, index) in children" :key="index">Naam: {{ person.name }}, Leeftijd: {{ person.age }}</li>
+        <h2>Volwassenen</h2>
+        <li v-for="(person, index) in adults" :key="index">Naam: {{ person.name }}, Leeftijd: {{ person.age }}</li>
+    </ul>
+    <h4>Totaal aantal mensen: {{ totalPeople }}</h4>
+    <h4>Totaal aantal kinderen: {{ numberOfChildren }}</h4>
+</template>
+
+<script setup>
+import {ref, computed} from 'vue';
+
+const people = ref([
+    {name: 'Jan', age: 12},
+    {name: 'Piet', age: 20},
+]);
+
+const children = computed(() => {
+    return people.value.filter(person => person.age < 18);
+});
+
+const adults = computed(() => {
+    return people.value.filter(person => person.age >= 18);
+});
+
+const totalPeople = computed(() => {
+    return people.value.length;
+});
+
+const numberOfChildren = computed(() => {
+    return children.value.length;
+});
+
+const newName = ref(null);
+const newAge = ref(null);
+
+var wrongInputError = false;
+const addPerson = () => {
+    if (newName.value && newAge.value) {
+        people.value.push({name: newName.value, age: newAge.value});
+    }
+    newName.value = null;
+    newAge.value = null;
+};
+</script>
