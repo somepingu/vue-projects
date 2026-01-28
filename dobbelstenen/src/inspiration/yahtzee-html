@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Yahtzee</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <button id="button">Gooi!</button>
+
+    <table>
+        <tbody>
+            <tr>
+                <td class="rolls">0</td>
+            </tr>
+            <tr>
+                <td class="rolls">0</td>
+            </tr>
+            <tr>
+                <td class="rolls">0</td>
+            </tr>
+            <tr>
+                <td class="rolls">0</td>
+            </tr>
+            <tr>
+                <td class="rolls">0</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Deel 1</td>
+                <td>1e spel</td>
+                <td>2e spel</td>
+                <td>3e spel</td>
+                <td>4e spel</td>
+            </tr>
+        </thead>
+        <tbody id="scoresheetPart1">
+            <tr>
+                <td>Enen</td>
+                <td class="numberCount">0</td>
+            </tr>
+            <tr>
+                <td>Tweeen</td>
+                <td class="numberCount">0</td>
+            </tr>
+            <tr>
+                <td>Drieen</td>
+                <td class="numberCount">0</td>
+            </tr>
+            <tr>
+                <td>Vieren</td>
+                <td class="numberCount">0</td>
+            </tr>
+            <tr>
+                <td>Vijfen</td>
+                <td class="numberCount">0</td>
+            </tr>
+            <tr>
+                <td>Zessen</td>
+                <td class="numberCount">0</td>
+            </tr>
+            <tr>
+                <td>Bonus</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Totaal deel 1</td>
+                <td id="totalPart1">0</td>
+            </tr>
+        </tbody>
+        <tbody id="scoresheetPart2">
+            <tr>
+                <td>Deel 2</td>
+            </tr>
+            <tr>
+                <td>Three of a kind</td>
+                <td class="specialThrows" id="threeOfAKind">0</td>
+            </tr>
+            <tr>
+                <td>Carre</td>
+                <td class="specialThrows" id="carre">0</td>
+            </tr>
+            <tr>
+                <td>Full house</td>
+                <td class="specialThrows" id="fullHouse">0</td>
+            </tr>
+            <tr>
+                <td>Kleine straat</td>
+                <td class="specialThrows" id="smallStraight">0</td>
+            </tr>
+            <tr>
+                <td>Grote straat</td>
+                <td class="specialThrows" id="largeStraight">0</td>
+            </tr>
+            <tr>
+                <td>Yahtzee</td>
+                <td class="specialThrows" id="yahtzee">0</td>
+            </tr>
+            <tr>
+                <td>Chance</td>
+                <td class="specialThrows" id="chance">0</td>
+            </tr>
+            <tr>
+                <td>Totaal deel 2</td>
+                <td id="totalPart2">0</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <td>Totale score</td>
+            <td id="totalScore">0</td>
+        </tfoot>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
