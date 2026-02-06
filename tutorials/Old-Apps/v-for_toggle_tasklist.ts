@@ -1,3 +1,4 @@
+//@ts-nocheck
 <template>
     <ul>
         <li v-for="(task, index) in tasks" :key="index">

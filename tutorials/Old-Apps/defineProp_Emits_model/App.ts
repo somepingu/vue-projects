@@ -1,3 +1,4 @@
+//@ts-nocheck
 <template>
     <ChildComponent :message="defPropTopText" @updateMessage="handleMessage" v-model="sharedMessage" />
     <p>current message: {{ mainMessage }}</p>

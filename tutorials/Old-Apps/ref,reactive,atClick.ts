@@ -1,3 +1,4 @@
+//@ts-nocheck
 <template>
   <p>Clicks: {{ clicks }}</p>
   <p>Speler: {{ player.firstName }}</p>

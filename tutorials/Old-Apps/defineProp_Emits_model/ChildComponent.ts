@@ -1,3 +1,4 @@
+//@ts-nocheck
 <template>
     <p>--------------------[start of child component]--------------------</p>
     <div>

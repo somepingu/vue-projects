@@ -1,5 +1,5 @@
 {
-  "name": "de-naam-van-de-opdracht",
+  "name": "yahtzee",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,8 +13,6 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
-    "eslint-plugin-vue": "^10.7.0",
-    "typescript-eslint": "^8.53.1",
     "vite": "^7.2.4"
   }
 }

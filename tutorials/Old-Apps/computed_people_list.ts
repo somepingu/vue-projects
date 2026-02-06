@@ -1,3 +1,4 @@
+//@ts-nocheck
 <template>
     <div>
         <p>Vul in naam en leeftijd</p>
