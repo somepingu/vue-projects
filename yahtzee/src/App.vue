@@ -12,7 +12,7 @@ const updateDice = (newDice) => {
 </script>
 
 <template>
-  <h3>top text</h3>
+  <h3>Yahtzee</h3>
   <ScoreTable :dice="dice"/>
   <ThrownDice :dice="dice" @updateDice="updateDice"/>
 </template>

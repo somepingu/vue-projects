@@ -1,6 +1,3 @@
-
-// receives dice from App.vue and calculates displays the score table
-
 <script setup>
 import { computed } from 'vue';
 
@@ -17,6 +14,20 @@ const diceCounts = computed(() => {
         countArray[die-1]++;
     });
     return countArray;
+});
+
+const diceStreetLength = computed(() => {
+    let streetLength = 0
+    let tempLength = 0;
+    for (let count of diceCounts.value) {
+        if (count == 1) {
+            tempLength++;
+            streetLength = Math.max(streetLength, tempLength);
+        } else {
+            tempLength = 0;
+        }
+    }
+    return streetLength;
 });
 
 const diceScoreSum = computed(() => {
@@ -47,7 +58,7 @@ const sixesScore = computed(() => {
     return props.dice.filter(die => die === 6).length * 6;
 });
 
-const TotalPart1Score = computed(() => {
+const totalPart1Score = computed(() => {
     return onesScore.value + twosScore.value + threesScore.value + foursScore.value + fivesScore.value + sixesScore.value;
 });
 
@@ -82,37 +93,41 @@ const fullHouseScore = computed(() => {
     return 0;
 });
 
-function straightPresent(straitLength) {
-    let currentChain = 0;
-    for (let i = 0; i < DIE_SIDES; i++) {
-        if (count[i + 1] == 1) {
-            currentChain++;
-            if (currentChain == straitLength) {
-                return true;
-            }
-        } else {
-            currentChain = 0;
-        }
-    }
-    return false;
-}
-
 const smallstreetScore = computed(() => {
+    if (diceStreetLength.value >= 4) {
+        return 30;
+    }
+    return 0;
+});
+
+const largestreetScore = computed(() => {
+    if (diceStreetLength.value >= 5) {
+        return 40;
+    }
+    return 0;
+});
+
+const yahtzeeScore = computed(() => {
     for (let count of diceCounts.value) {
-        if (count == 0) {
-            return 0; 
+        if (count == 5) {
+            return 50;
         }
     }
+    return 0;
+
 });
 
 const chanceScore = computed(() => {
     return diceScoreSum.value;
 });
 
+const totalPart2Score = computed(() => {
+    return threeOfAKindScore.value + fourOfAKindScore.value + fullHouseScore.value + smallstreetScore.value + largestreetScore.value + yahtzeeScore.value + chanceScore.value;
+});
+
 </script>
 
 <template>
-    <h3>scoreboard Dice: <li v-for="(die, index) in dice" :key="index"> {{ die }}</li></h3>
     <h3>Score Table</h3>
     <table>
     <thead>
@@ -155,7 +170,7 @@ const chanceScore = computed(() => {
             </tr>
             <tr>
                 <td>Totaal deel 1</td>
-                <td>0</td>
+                <td>{{ totalPart1Score }}</td>
             </tr>
         </tbody>
         <tbody>
@@ -176,15 +191,15 @@ const chanceScore = computed(() => {
             </tr>
             <tr>
                 <td>Kleine straat</td>
-                <td>0</td>
+                <td>{{ smallstreetScore }}</td>
             </tr>
             <tr>
                 <td>Grote straat</td>
-                <td>0</td>
+                <td>{{ largestreetScore }}</td>
             </tr>
             <tr>
                 <td>Yahtzee</td>
-                <td>0</td>
+                <td>{{ yahtzeeScore }}</td>
             </tr>
             <tr>
                 <td>Chance</td>
@@ -192,13 +207,13 @@ const chanceScore = computed(() => {
             </tr>
             <tr>
                 <td>Totaal deel 2</td>
-                <td>0</td>
+                <td>{{ totalPart2Score }}</td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
                 <td>Totale score</td>
-                <td>0</td>
+                <td>{{ totalPart1Score + totalPart2Score }}</td>
             </tr>
         </tfoot>
     </table>
