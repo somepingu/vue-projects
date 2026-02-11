@@ -7,8 +7,3 @@ export const groceryRoutes = [
   { path: '/create', component: CreateView },
   { path: '/edit', component: EditView },
 ]
-
-// export const groceryRoutes = [
-//   { path: '/', component: OverviewView },
-//   { path: '/create', component: CreateView },
-// ]
