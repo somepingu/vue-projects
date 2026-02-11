@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import GroceriesTable from '../components/GroceriesTable.vue';
 
 const list = ref([
   { name: 'Rijst', price: 1.00, quantity: 1 },
@@ -10,17 +11,7 @@ const list = ref([
 </script>
 
 <template>
-  <p>
-    <strong>Current route path:</strong> {{ $route.fullPath }}
-  </p>
-  <nav>
-    <RouterLink to="/">Go to Home</RouterLink>
-    <RouterLink to="/create">Go to Create</RouterLink>
-    <RouterLink to="/edit">Go to Edit</RouterLink>
-  </nav>
-  <main>
-    <RouterView />
-  </main>
+    <GroceriesTable :list="list"/>
 </template>
 
 <style scoped>

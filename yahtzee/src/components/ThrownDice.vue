@@ -6,7 +6,7 @@ const props = defineProps({
         type: Array,
         required: true
     }
-})
+});
 
 const emit = defineEmits(['updateDice']);
 
