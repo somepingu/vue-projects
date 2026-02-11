@@ -2,14 +2,14 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-    groceries: {
+    list: {
         type: Array,
         required: true
     },
 });
 
 const subTotal = computed(() => {
-  const subTotalList = props.groceries.map(item => item.price * item.quantity);
+  const subTotalList = props.list.map(item => item.price * item.quantity);
   return subTotalList;
 
 });
@@ -31,12 +31,11 @@ const total = computed(() => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(item, index) in props.groceries" :key="index">
+      <tr v-for="(item, index) in props.list" :key="index">
         <td>{{ item.name }}</td>
         <td class="price">€{{ item.price.toFixed(2) }}</td>
         <td><input v-model.number="item.quantity" type="number" min="0" /></td>
         <td class="price">€{{ subTotal[index].toFixed(2) }}</td>
-        <td><router-link :to="`/edit/${index}`">Bewerken</router-link></td>
       </tr>
     </tbody>
     <tfoot>

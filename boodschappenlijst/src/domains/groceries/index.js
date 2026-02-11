@@ -8,14 +8,3 @@ export const router = createRouter({
   history: createMemoryHistory(),
   routes,
 });
-
-export default router
-
-// const routes = [
-//   ...groceryRoutes,
-// ]
-
-// export const router = createRouter({
-//   history: createMemoryHistory(),
-//   routes,
-// });
