@@ -1,30 +1,75 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { computed, ref } from 'vue'
+// defina array of objects with name and price
+const list = ref([
+  { name: 'Rijst', price: 1.00, quantity: 1 },
+  { name: 'Broccoli', price: 0.99, quantity: 2 },
+  { name: 'Koekjes', price: 1.20, quantity: 3 },
+  { name: 'Noten', price: 2.99, quantity: 4 }
+])
+// use compute to compute (sub)total price
+const subTotal = computed(() => {
+  const subTotalList = list.value.map(item => item.price * item.quantity);
+  return subTotalList;
+});
+
+const total = computed(() => {
+  return subTotal.value.reduce((total, subTotal) => total + subTotal, 0)
+})
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <h2>Boodschappenlijst</h2>
+  <table class="grocery-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Prijs</th>
+        <th>Aantal</th>
+        <th>Subtotaal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(item, index) in list" :key="index">
+        <td>{{ item.name }}</td>
+        <td class="price">€{{ item.price.toFixed(2) }}</td>
+        <td><input v-model.number="item.quantity" type="number" min="0" /></td>
+        <td class="price">€{{ subTotal[index].toFixed(2) }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="total-label">Totaal:</td>
+        <td class="total-price">€{{  total.toFixed(2) }}</td>
+      </tr>
+    </tfoot>
+  </table>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.grocery-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.grocery-table th,
+.grocery-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.grocery-table thead th {
+  background: #f5f5f5;
+}
+.grocery-table input[type="number"] {
+  width: 4rem;
+}
+.grocery-table .price {
+  text-align: right;
+}
+.grocery-table .total-label,
+.grocery-table .total-price {
+  text-align: right;
+  font-weight: 700;
 }
 </style>

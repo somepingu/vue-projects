@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boodschappenlijst</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <table id="lijst">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Prijs</th>
+                <th>Hoeveelheid</th>
+                <th>Subtotaal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Rijst</td>
+                <td class="productPrice">1.00</td>
+                <td><input id="price1" class="productQuantity" type="number"></td>
+                <td class="productTotalCost">0.00</td>
+            </tr>
+            <tr>
+                <td>Broccoli</td>
+                <td class="productPrice">0.99</td>
+                <td><input id="price12" class="productQuantity" type="number"></td>
+                <td class="productTotalCost">0.00</td>
+            </tr>
+            <tr>
+                <td>Koekjes</td>
+                <td class="productPrice">1.20</td>
+                <td><input id="price13" class="productQuantity" type="number"></td>
+                <td class="productTotalCost">0.00</td>
+            </tr>
+            <tr>
+                <td>Noten</td>
+                <td class="productPrice">2.99</td>
+                <td><input id="price14" class="productQuantity" type="number"></td>
+                <td class="productTotalCost">0.00</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3"><strong>Totaal</strong></td>
+                <td id="totalCost">0.00</td>
+            </tr>
+        </tfoot>
+    </table>
+    <script src="script.js"></script>
+</body>
+
+</html>
