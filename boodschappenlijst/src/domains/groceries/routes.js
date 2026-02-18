@@ -5,5 +5,5 @@ import EditView from './pages/Edit.vue'
 export const groceryRoutes = [
   { path: '/', component: OverviewView },
   { path: '/create', component: CreateView },
-  { path: '/edit', component: EditView },
+  { path: '/edit/:id', component: EditView, props: (route) => ({ id: Number(route.params.id) }) }
 ]

@@ -1,5 +1,9 @@
+<!-- Page displaying all groceries -->
+
 <script setup>
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const props = defineProps({
     groceries: {
@@ -17,6 +21,12 @@ const subTotal = computed(() => {
 const total = computed(() => {
   return subTotal.value.reduce((total, subTotal) => total + subTotal, 0)
 });
+
+const emit = defineEmits(['removeGrocery']);
+
+const emitEvent = (groceryToRemove) => {
+  emit('removeGrocery', groceryToRemove);
+};
 </script>
 
 <template>
@@ -31,12 +41,13 @@ const total = computed(() => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(item, index) in props.groceries" :key="index">
+      <tr v-for="(item, index) in props.groceries" :key="item.id">
         <td>{{ item.name }}</td>
         <td class="price">€{{ item.price.toFixed(2) }}</td>
-        <td><input v-model.number="item.quantity" type="number" min="0" /></td>
+        <td>{{ item.quantity }}</td>
         <td class="price">€{{ subTotal[index].toFixed(2) }}</td>
-        <td><router-link :to="`/edit/${index}`">Bewerken</router-link></td>
+        <td><button @click="() => router.push(`/edit/${item.id}`)">Bewerken</button></td>
+        <td><button @click="emitEvent(item)">Verwijderen</button></td>
       </tr>
     </tbody>
     <tfoot>
@@ -53,6 +64,7 @@ const total = computed(() => {
   width: 100%;
   border-collapse: collapse;
   margin-top: 0.5rem;
+  margin-left: 6rem;
 }
 .grocery-table th,
 .grocery-table td {
@@ -73,5 +85,27 @@ const total = computed(() => {
 .grocery-table .total-price {
   text-align: right;
   font-weight: 700;
+}
+
+.grocery-table button {
+  padding: 4px 8px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+}
+
+.grocery-table button:hover {
+  background-color: #e0e0e0;
+}
+
+.grocery-table td button {
+  width: 100%;
+}
+
+.grocery-table td:has(button) {
+  padding: 2px;
+  width: auto;
+  max-width: 90px;
 }
 </style>
