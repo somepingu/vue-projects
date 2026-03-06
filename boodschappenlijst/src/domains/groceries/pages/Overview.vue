@@ -1,7 +1,6 @@
 <script setup>
 import GroceriesTable from '../components/GroceriesTable.vue';
-import { getAllGroceries } from '../store.js'
-import { removeGrocery } from '../store.js';
+import { getAllGroceries, removeGrocery } from '../store.js';
 
 const groceries = getAllGroceries;
 
